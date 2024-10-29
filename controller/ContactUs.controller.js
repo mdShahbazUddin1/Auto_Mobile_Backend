@@ -64,7 +64,22 @@ const uploadToS3 = (key, buffer, mimetype) => {
     );
   });
 };
+const getAllContacts = async (req, res) => {
+  try {
+    // Fetch all contacts from the database
+    const contacts = await ContactModel.find(); // You can add sorting, filtering, or pagination as needed
+
+    // Send the retrieved contacts as a response
+    res.status(200).send({ msg: "Contacts retrieved successfully", contacts });
+  } catch (error) {
+    console.error("Error retrieving contacts:", error);
+    res
+      .status(500)
+      .send({ msg: "Internal server error", error: error.message });
+  }
+};
 
 module.exports = {
   saveContact,
+  getAllContacts,
 };

@@ -1,6 +1,9 @@
 const express = require("express");
 const multer = require("multer");
-const { saveContact } = require("../controller/ContactUs.controller");
+const {
+  saveContact,
+  getAllContacts,
+} = require("../controller/ContactUs.controller");
 const contactRouter = express.Router();
 
 // Configure multer to handle file uploads
@@ -9,5 +12,6 @@ const upload = multer({ storage: storage });
 
 // Define the route to save contact with image uploads
 contactRouter.post("/contacts", upload.array("images", 10), saveContact); // Allows up to 10 images
+contactRouter.get("/get", getAllContacts); // Allows up to 10 images
 
 module.exports = contactRouter;
