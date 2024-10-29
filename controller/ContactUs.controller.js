@@ -79,7 +79,57 @@ const getAllContacts = async (req, res) => {
   }
 };
 
+const updateStatusById = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  // Ensure that the status is valid
+  const allowedStatuses = ["pending", "rejected", "completed"];
+  if (!allowedStatuses.includes(status)) {
+    return res.status(400).json({ message: "Invalid status value" });
+  }
+
+  try {
+    const contact = await ContactModel.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+
+    if (!contact) {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+
+    res.status(200).json({ message: "Status updated successfully", contact });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating status", error });
+  }
+};
+const getPendingContacts = async (req, res) => {
+  try {
+    const pendingContacts = await ContactModel.find({ status: "pending" });
+    res.status(200).json({ contacts: pendingContacts });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching pending contacts", error });
+  }
+};
+
+// Controller function to get all rejected contacts
+const getRejectedContacts = async (req, res) => {
+  try {
+    const rejectedContacts = await ContactModel.find({ status: "rejected" });
+    res.status(200).json({ contacts: rejectedContacts });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error fetching rejected contacts", error });
+  }
+};
+
 module.exports = {
   saveContact,
   getAllContacts,
+  updateStatusById,
+  getPendingContacts,
+  getRejectedContacts,
 };

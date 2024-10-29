@@ -3,6 +3,7 @@ const cors = require("cors");
 const connection = require("./config/DB");
 const contactRouter = require("./routes/contact.routes");
 const userRouter = require("./routes/user.routes");
+const ContactModel = require("./model/ContatcUs");
 
 const app = express();
 app.use(cors());
