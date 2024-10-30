@@ -1,6 +1,7 @@
 const AWS = require("aws-sdk");
 const uuid = require("uuid");
 const ContactModel = require("../model/ContatcUs");
+require("dotenv").config();
 
 AWS.config.update({
   accessKeyId: process.env.AWSACCESSKEYID,
@@ -38,7 +39,7 @@ const saveContact = async (req, res) => {
 
     res.status(201).send({ msg: "Contact saved successfully", newContact });
   } catch (error) {
-    console.error("Error saving contact:", error);
+    console.error("Error saving contact:", error.message);
     res
       .status(500)
       .send({ msg: "Internal server error", error: error.message });
