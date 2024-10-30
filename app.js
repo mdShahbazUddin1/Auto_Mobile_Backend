@@ -6,7 +6,13 @@ const userRouter = require("./routes/user.routes");
 const ContactModel = require("./model/ContatcUs");
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Allow requests from this origin
+    methods: ["GET", "POST"], // Allow these HTTP methods
+    credentials: true, // Allow credentials (optional)
+  })
+);
 
 app.use(express.json());
 
