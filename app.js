@@ -8,7 +8,7 @@ const ContactModel = require("./model/ContatcUs");
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:3000", // Allow requests from this origin
+    origin: ["http://localhost:3000", "https://genuine-client.vercel.app/"], // Allow requests from this origin
     methods: ["GET", "POST"], // Allow these HTTP methods
     credentials: true, // Allow credentials (optional)
   })
