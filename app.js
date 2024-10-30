@@ -14,7 +14,7 @@ app.use(
       "https://admin-dashboard-beta-henna.vercel.app",
       "https://www.genuineautobosch.com",
     ], // Allow requests from this origin
-    methods: ["GET", "POST"], // Allow these HTTP methods
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allow these HTTP methods
     credentials: true, // Allow credentials (optional)
   })
 );
