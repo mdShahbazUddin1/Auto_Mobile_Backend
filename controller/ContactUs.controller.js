@@ -108,7 +108,7 @@ const updateStatusById = async (req, res) => {
 };
 const getPendingContacts = async (req, res) => {
   try {
-    const pendingContacts = await ContactModel.find({ status: "pending" });
+    const pendingContacts = await ContactModel.find({ status: "completed" });
     res.status(200).json({ contacts: pendingContacts });
   } catch (error) {
     res.status(500).json({ message: "Error fetching pending contacts", error });
