@@ -127,10 +127,40 @@ const getRejectedContacts = async (req, res) => {
   }
 };
 
+const getPendingNotifications = async (req, res) => {
+  try {
+    // Fetch the latest pending notifications and populate user's full name
+    const pendingNotifications = await ContactModel.find({
+      status: "pending",
+      seen: false,
+    }).sort({ createdAt: -1 });
+    // Send the pending notifications in response
+    res.status(200).json({ notifications: pendingNotifications });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error fetching pending notifications", error });
+  }
+};
+
+const markAllNotificationsAsSeen = async (req, res) => {
+  try {
+    // Update all notifications to set `seen` as true
+    await ContactModel.updateMany({}, { seen: true });
+
+    // Respond with success message
+    res.status(200).json({ message: "All notifications marked as seen." });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating notifications", error });
+  }
+};
+
 module.exports = {
   saveContact,
   getAllContacts,
   updateStatusById,
   getPendingContacts,
   getRejectedContacts,
+  getPendingNotifications,
+  markAllNotificationsAsSeen,
 };

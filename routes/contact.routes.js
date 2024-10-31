@@ -6,6 +6,8 @@ const {
   updateStatusById,
   getPendingContacts,
   getRejectedContacts,
+  getPendingNotifications,
+  markAllNotificationsAsSeen,
 } = require("../controller/ContactUs.controller");
 const contactRouter = express.Router();
 
@@ -19,5 +21,7 @@ contactRouter.get("/get", getAllContacts); // Allows up to 10 images
 contactRouter.put("/contact/:id/status", updateStatusById);
 contactRouter.get("/contacts/pending", getPendingContacts);
 contactRouter.get("/contacts/rejected", getRejectedContacts);
+contactRouter.get("/notifications/pending", getPendingNotifications);
+contactRouter.put("/notifications/markAllAsSeen", markAllNotificationsAsSeen);
 
 module.exports = contactRouter;
