@@ -13,6 +13,7 @@ app.use(
       "https://genuine-client.vercel.app",
       "https://admin-dashboard-beta-henna.vercel.app",
       "https://www.genuineautobosch.com",
+      "https://admin.genuineautobosch.com/",
     ], // Allow requests from this origin
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allow these HTTP methods
     credentials: true, // Allow credentials (optional)
