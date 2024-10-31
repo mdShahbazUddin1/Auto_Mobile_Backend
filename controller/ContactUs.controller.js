@@ -143,6 +143,26 @@ const getPendingNotifications = async (req, res) => {
   }
 };
 
+const deleteNotificationById = async (req, res) => {
+  const { id } = req.params; // Get the notification ID from request parameters
+
+  try {
+    // Attempt to find and delete the notification by ID
+    const deletedNotification = await ContactModel.findByIdAndDelete(id);
+
+    // Check if a notification was found and deleted
+    if (!deletedNotification) {
+      return res.status(404).json({ message: "Notification not found" });
+    }
+
+    // Respond with success message
+    res.status(200).json({ message: "Notification deleted successfully" });
+  } catch (error) {
+    // Handle any errors during the deletion process
+    res.status(500).json({ message: "Error deleting notification", error });
+  }
+};
+
 const markAllNotificationsAsSeen = async (req, res) => {
   try {
     // Update all notifications to set `seen` as true
@@ -163,4 +183,5 @@ module.exports = {
   getRejectedContacts,
   getPendingNotifications,
   markAllNotificationsAsSeen,
+  deleteNotificationById,
 };

@@ -8,6 +8,7 @@ const {
   getRejectedContacts,
   getPendingNotifications,
   markAllNotificationsAsSeen,
+  deleteNotificationById,
 } = require("../controller/ContactUs.controller");
 const contactRouter = express.Router();
 
@@ -23,5 +24,6 @@ contactRouter.get("/contacts/pending", getPendingContacts);
 contactRouter.get("/contacts/rejected", getRejectedContacts);
 contactRouter.get("/notifications/pending", getPendingNotifications);
 contactRouter.put("/notifications/markAllAsSeen", markAllNotificationsAsSeen);
+contactRouter.delete("/delete/:id", deleteNotificationById);
 
 module.exports = contactRouter;
